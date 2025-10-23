@@ -1,28 +1,24 @@
 function SecondsCounter(props) {
-  // Convertimos el número de segundos a 6 dígitos, con ceros a la izquierda
+  // Convert the number of seconds to 6 digits, with leading zeros
   const secondsString = props.seconds.toString().padStart(6, "0");
 
-  return React.createElement(
-    "div",
-    { className: "counter-container" },
-    // Ícono del reloj primero
-    React.createElement(
-      "div",
-      { className: "icon" },
+  return React.createElement("div", { className: "counter-container" },
+    // Clock icon first
+    React.createElement("div", { className: "icon" },
       React.createElement("i", { className: "fa-regular fa-clock" })
     ),
-    // Creamos un div por cada dígito
+    // Create a div for each digit
     ...secondsString.split("").map((digit, index) =>
       React.createElement("div", { className: "digit", key: index }, digit)
     )
   );
 }
 
-// Crear raíz React
+// Create react root
 const root = ReactDOM.createRoot(document.getElementById("root"));
 let seconds = 0;
 
-// Actualizar cada segundo
+// Update every second
 setInterval(() => {
   root.render(React.createElement(SecondsCounter, { seconds }));
   seconds++;
